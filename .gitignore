@@ -1,0 +1,14 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# Migrations
+migrations/
+
+# Settings
+core/settings.py
+
+# VENV
+myvenv/
+
+.idea/
