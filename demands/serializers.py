@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 
 
+
 class DemandSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source='user.username')
     created_date = serializers.ReadOnlyField()
@@ -21,7 +22,6 @@ class DemandSerializer(serializers.ModelSerializer):
 
 
 
-
 class PositionSerializer(serializers.ModelSerializer):
     id_demand = serializers.PrimaryKeyRelatedField( queryset=Demand.objects.all())
 
@@ -36,6 +36,7 @@ class PositionSerializer(serializers.ModelSerializer):
             'price_one',)
 
 
+
 class UserSerializer(serializers.ModelSerializer):
     #demands = serializers.PrimaryKeyRelatedField(many=True, queryset=Demand.objects.all())
 
@@ -44,4 +45,4 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = (
             'id',
-            'username',) #Если оставить demands и добавить его здесь, то убдет видно какие заявки пользователь создал
+            'username',) #Если оставить demands и добавить его здесь, то будет видно какие заявки пользователь создал

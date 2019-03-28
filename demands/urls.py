@@ -12,10 +12,10 @@ router.register(r'demands', views.DemandViewSet)
 router.register(r'users', views.UserViewSet)
 router.register(r'positions', views.PositionViewSet)
 
-schema_view = get_schema_view(title='Example API')
+#schema_view = get_schema_view(title='Example API')
 
 urlpatterns = [
-    path('schema/', schema_view),
+    #path('schema/', schema_view),
     path('', include(router.urls)),
 ]
 
