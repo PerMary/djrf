@@ -37,12 +37,12 @@ class PositionSerializer(serializers.ModelSerializer):
 
 
 
-class UserSerializer(serializers.ModelSerializer):
-    #demands = serializers.PrimaryKeyRelatedField(many=True, queryset=Demand.objects.all())
-
-
-    class Meta:
-        model = User
-        fields = (
-            'id',
-            'username',) #Если оставить demands и добавить его здесь, то будет видно какие заявки пользователь создал
+# class UserSerializer(serializers.ModelSerializer):
+#     #demands = serializers.PrimaryKeyRelatedField(many=True, queryset=Demand.objects.all())
+#
+#
+#     class Meta:
+#         model = User
+#         fields = (
+#             'id',
+#             'username',) #Если оставить demands и добавить его здесь, то будет видно какие заявки пользователь создал
