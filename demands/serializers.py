@@ -11,6 +11,7 @@ class DemandSerializer(serializers.ModelSerializer):
     positions = serializers.PrimaryKeyRelatedField( read_only=True)
 
 
+
     class Meta:
         model = Demand
         fields = (
@@ -46,3 +47,4 @@ class PositionSerializer(serializers.ModelSerializer):
 #         fields = (
 #             'id',
 #             'username',) #Если оставить demands и добавить его здесь, то будет видно какие заявки пользователь создал
+

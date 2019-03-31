@@ -21,6 +21,7 @@ class Demand(models.Model):
         related_name='demands',
         on_delete=models.CASCADE
     )
+
     highlighted = models.TextField()
 
 

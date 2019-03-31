@@ -1,5 +1,6 @@
 from .models import Demand, Position
 from demands.serializers import DemandSerializer, PositionSerializer
+
 from rest_framework import generics
 from django.contrib.auth.models import User
 from rest_framework import permissions
@@ -47,6 +48,7 @@ class PositionViewSet(viewsets.ModelViewSet):
 # class UserViewSet(viewsets.ReadOnlyModelViewSet):
 #     queryset = User.objects.all()
 #     serializer_class = UserSerializer
+
 
 
 
