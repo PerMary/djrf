@@ -1,0 +1,19 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# Migrations
+migrations/
+
+# Settings
+core/settings/settings.py
+
+# IntelliJ
+.idea/
+
+
+# VENV
+myenv/
+
+#WSGI
+wsgi.py
