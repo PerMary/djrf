@@ -2,14 +2,29 @@ from rest_framework import serializers
 from .models import Demand, Position
 from django.utils import timezone
 from django.contrib.auth.models import User
+from users.serializers import UserSerializer, ProfileSerializer
 
+
+
+class PositionSerializer(serializers.ModelSerializer):
+    demand = serializers.PrimaryKeyRelatedField(write_only=False,
+                                                queryset=Demand.objects.all())
+
+    class Meta:
+        model = Position
+        fields = (
+            'id',
+            'demand',
+            'name_product',
+            'art_product',
+            'quantity',
+            'price_one',)
 
 
 class DemandSerializer(serializers.ModelSerializer):
-    user = serializers.ReadOnlyField(source='user.username')
+    user = UserSerializer(read_only=True)
     created_date = serializers.ReadOnlyField()
-    positions = serializers.PrimaryKeyRelatedField( read_only=True)
-
+    positions = serializers.PrimaryKeyRelatedField(read_only=True,)
 
     class Meta:
         model = Demand
@@ -18,22 +33,7 @@ class DemandSerializer(serializers.ModelSerializer):
             'created_date',
             'description',
             'user',
-            'positions',)
-
-
-
-class PositionSerializer(serializers.ModelSerializer):
-    id_demand = serializers.PrimaryKeyRelatedField( queryset=Demand.objects.all())
-
-    class Meta:
-        model = Position
-        fields = (
-            'id',
-            'id_demand',
-            'name_product',
-            'art_product',
-            'quantity',
-            'price_one',)
+            'positions',) #Как сделать, чтобы для каждой завки выводились ее позиции
 
 
 
