@@ -15,7 +15,9 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class ProfileSerializer(serializers.ModelSerializer):
-    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+    user = serializers.PrimaryKeyRelatedField(write_only=True,
+                                              source='users',
+                                              queryset=User.objects.all(),)
 
 
     class Meta:

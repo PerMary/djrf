@@ -6,14 +6,10 @@ __pycache__/
 migrations/
 
 # Settings
-core/settings/settings.py
-
-# IntelliJ
-.idea/
-
+core/settings.py
 
 # VENV
 myenv/
 
-#WSGI
-wsgi.py
+.idea/
+

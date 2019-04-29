@@ -21,52 +21,46 @@ class Demand(models.Model):
         related_name='demands',
         on_delete=models.CASCADE
     )
-
     highlighted = models.TextField()
 
 
     def __str__(self):
         return self.description
 
-    def save(self, *args, **kwargs):
-        super(Demand,self).save( *args, **kwargs)
+
+    # def save(self, *args, **kwargs):
+    #     super(Demand,self).save( *args, **kwargs)
 
 
     class Meta:
-        ordering = ('created_date','user',)
+        ordering = ['-created_date']
 
 
 # Позиции
 class Position(models.Model):
     id = models.AutoField(primary_key=True)
-    id_demand = models.ForeignKey(
+
+    demand = models.ForeignKey(
         Demand,
-        null=False,
-        blank=False,
         on_delete=models.CASCADE,
-        verbose_name='Номер заявки: '
+        verbose_name='Номер заявки: ',
     )
     name_product = models.CharField(
         max_length=50,
         verbose_name='Наименование:',
-        blank=False,
         help_text='Конденсатор',
     )
     art_product = models.CharField(
         max_length=15,
         verbose_name='Артикул:',
-        blank=False,
         help_text='AK465JKH7',
     )
     quantity = models.PositiveSmallIntegerField(
-        blank=False,
-        null=False,
         verbose_name='Количество:',
+        help_text='1000',
     )
     price_one = models.FloatField(
         verbose_name='Цена за 1 шт:',
-        blank=True,
-        null=False,
         default=0,
         help_text='0',
     )

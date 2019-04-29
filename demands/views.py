@@ -1,6 +1,5 @@
 from .models import Demand, Position
 from demands.serializers import DemandSerializer, PositionSerializer
-
 from rest_framework import generics
 from django.contrib.auth.models import User
 from rest_framework import permissions
@@ -22,10 +21,13 @@ class DemandViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
                           IsOwnerOrReadOnly,)
 
-    @action(detail=True, renderer_classes=[renderers.StaticHTMLRenderer])
-    def highlight(self, request, *args, **kwargs):
-       demand = self.get_object()
-       return Response(demand.highlighted)
+    # @action(
+    #   detail=True,
+    #   renderer_classes=[renderers.StaticHTMLRenderer],
+    #   )
+    # def highlight(self, request,):
+    #    demand = self.get_object()
+    #    return Response(demand.highlighted)
 
 
     def perform_create(self, serializer):
@@ -37,18 +39,6 @@ class DemandViewSet(viewsets.ModelViewSet):
 class PositionViewSet(viewsets.ModelViewSet):
     queryset = Position.objects.all()
     serializer_class =  PositionSerializer
-
-    # def perform_create(self, serializer):
-    #     serializer.save(id_demand=self.request.id_demand)
-
-
-
-
-
-# class UserViewSet(viewsets.ReadOnlyModelViewSet):
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializer
-
 
 
 
