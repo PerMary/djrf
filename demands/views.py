@@ -18,8 +18,8 @@ from rest_framework.decorators import action
 class DemandViewSet(viewsets.ModelViewSet):
     queryset = Demand.objects.all()
     serializer_class = DemandSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerOrReadOnly,)
+    #permission_classes = (permissions.IsAuthenticatedOrReadOnly,
+     #                     IsOwnerOrReadOnly,)
 
     # @action(
     #   detail=True,
