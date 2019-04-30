@@ -9,7 +9,7 @@ migrations/
 core/settings.py
 
 # VENV
-myenv/
+myvenv/
 
 .idea/
 
