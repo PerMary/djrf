@@ -27,6 +27,7 @@ class Demand(models.Model):
     def __str__(self):
         return self.description
 
+
     # def save(self, *args, **kwargs):
     #     super(Demand,self).save( *args, **kwargs)
 
@@ -37,6 +38,7 @@ class Demand(models.Model):
 # Позиции
 class Position(models.Model):
     id = models.AutoField(primary_key=True)
+
     demand = models.ForeignKey(
         Demand,
         on_delete=models.CASCADE,

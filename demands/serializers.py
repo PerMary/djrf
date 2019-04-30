@@ -24,7 +24,8 @@ class PositionSerializer(serializers.ModelSerializer):
 class DemandSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
     created_date = serializers.ReadOnlyField()
-    positions = serializers.PrimaryKeyRelatedField(read_only=True,)
+    #positions = serializers.PrimaryKeyRelatedField(many=True,queryset=Position.objects.all())
+    #positions=PositionSerializer(many=True,queryset=Position.objects.all())
 
     class Meta:
         model = Demand
@@ -32,8 +33,7 @@ class DemandSerializer(serializers.ModelSerializer):
             'id',
             'created_date',
             'description',
-            'user',
-            'positions',) #Как сделать, чтобы для каждой завки выводились ее позиции
+            'user',) #Как сделать, чтобы для каждой завки выводились ее позиции
 
 
 
@@ -46,3 +46,4 @@ class DemandSerializer(serializers.ModelSerializer):
 #         fields = (
 #             'id',
 #             'username',) #Если оставить demands и добавить его здесь, то будет видно какие заявки пользователь создал
+

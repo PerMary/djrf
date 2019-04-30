@@ -6,6 +6,7 @@ class Profile(models.Model):
 		User,
 		on_delete=models.CASCADE,
 		verbose_name='Пользователь')
+
 	lastname = models.CharField(
 		max_length=200,
 		null=False,
@@ -19,6 +20,7 @@ class Profile(models.Model):
 		blank=True,
 		verbose_name='Имя: ',
 		help_text='Иван',
+
 	)
 	middle_name = models.CharField(
 		max_length=200,
@@ -27,3 +29,4 @@ class Profile(models.Model):
 		default='',
 		verbose_name='Отчество: ',
 	    help_text='Иванович',)
+
