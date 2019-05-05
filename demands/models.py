@@ -31,7 +31,6 @@ class Demand(models.Model):
     # def save(self, *args, **kwargs):
     #     super(Demand,self).save( *args, **kwargs)
 
-
     class Meta:
         ordering = ['-created_date']
 

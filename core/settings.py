@@ -39,9 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #install app
     'material',
+    'djoser',
     'rest_framework',
     'rest_framework_swagger',
     'drf_yasg',
+    'mptt',
     #myapp
     'demands',
     'users',
@@ -136,6 +138,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
+
 
 
 # Swagger settings
