@@ -143,6 +143,8 @@ REST_FRAMEWORK = {
 
 # Swagger settings
 
+#AUTH_USER_MODEL = 'users.Profile'
+
 SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': {
         'api_key': {
