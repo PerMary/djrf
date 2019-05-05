@@ -11,6 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'username',
+            'password',
         ) #Если оставить demands и добавить его здесь, то будет видно какие заявки пользователь создал
 
 
