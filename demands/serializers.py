@@ -8,7 +8,7 @@ from users.serializers import UserSerializer, ProfileSerializer
 
 class PositionSerializer(serializers.ModelSerializer):
     demand = serializers.PrimaryKeyRelatedField(write_only=False,
-                                                queryset=Demand.objects.all())
+                                               queryset=Demand.objects.all())
 
     class Meta:
         model = Position
@@ -25,7 +25,8 @@ class DemandSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
     created_date = serializers.ReadOnlyField()
     #positions = serializers.PrimaryKeyRelatedField(many=True,queryset=Position.objects.all())
-    #positions=PositionSerializer(many=True,queryset=Position.objects.all())
+    positions = PositionSerializer(read_only=True,)
+                                   #queryset=Position.objects.filter(demand=1))
 
     class Meta:
         model = Demand
@@ -33,8 +34,15 @@ class DemandSerializer(serializers.ModelSerializer):
             'id',
             'created_date',
             'description',
-            'user',) #Как сделать, чтобы для каждой завки выводились ее позиции
+            'user',
+            'positions') #Как сделать, чтобы для каждой завки выводились ее позиции
 
+        # def create(self, validated_data):
+        #     position_data = validated_data.pop('position')
+        #     #demand = Demand.objects.create_demand(**validated_data)
+        #     demand =Demand.objects.create_demand(**validated_data)
+        #     Position.object.create(position=position, **position_data)
+        #     return demand
 
 
 # class UserSerializer(serializers.ModelSerializer):

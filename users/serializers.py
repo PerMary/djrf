@@ -5,7 +5,9 @@ from users.models import Profile
 class ProfileSerializer(serializers.ModelSerializer):
     # #user = serializers.PrimaryKeyRelatedField(read_only=True,
     #                                           source='users',
-    #                                           )
+    #
+    # user = serializers.PrimaryKeyRelatedField(
+    #                                           queryset=User.objects.all())
 
 
     class Meta:
@@ -36,3 +38,4 @@ class UserSerializer(serializers.ModelSerializer):
         Profile.objects.create(user=user, **profile_data)
         return user
 
+    #Как сделать обновление пароля, чтобы он не был открытым
