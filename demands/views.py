@@ -1,7 +1,7 @@
 from .models import Demand, Position
 from demands.serializers import DemandSerializer, PositionSerializer
 from rest_framework import generics
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 from rest_framework import permissions
 from demands.permissions import IsOwnerOrReadOnly
 from rest_framework.decorators import api_view

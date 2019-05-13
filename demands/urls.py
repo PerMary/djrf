@@ -1,23 +1,23 @@
-from django.urls import  path
-from rest_framework.urlpatterns import format_suffix_patterns
-from demands import views
-from demands.views import DemandViewSet, UserViewSet
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from demands import views
-from rest_framework.schemas import get_schema_view
-
-router = DefaultRouter()
-router.register(r'demands', views.DemandViewSet)
-router.register(r'users', views.UserViewSet)
-router.register(r'positions', views.PositionViewSet)
-
-schema_view = get_schema_view(title='Example API')
-
-urlpatterns = [
-    path('schema/', schema_view),
-    path('', include(router.urls)),
-]
+# from django.urls import  path
+# from rest_framework.urlpatterns import format_suffix_patterns
+# from demands import views
+# from demands.views import DemandViewSet, UserViewSet
+# from django.urls import path, include
+# from rest_framework.routers import DefaultRouter
+# from demands import views
+# from rest_framework.schemas import get_schema_view
+#
+# router = DefaultRouter()
+# router.register(r'demands', views.DemandViewSet)
+# router.register(r'users', views.UserViewSet)
+# router.register(r'positions', views.PositionViewSet)
+#
+# schema_view = get_schema_view(title='Example API')
+#
+# urlpatterns = [
+#     path('schema/', schema_view),
+#     path('', include(router.urls)),
+# ]
 
 
 # demand_list = DemandViewSet.as_view({

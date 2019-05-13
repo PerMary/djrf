@@ -1,8 +1,8 @@
 from rest_framework import serializers
 from .models import Demand, Position
 from django.utils import timezone
-from django.contrib.auth.models import User
-from users.serializers import UserSerializer, ProfileSerializer
+#from django.contrib.auth.models import User
+from users.serializers import UserSerializer
 
 
 
@@ -24,8 +24,7 @@ class PositionSerializer(serializers.ModelSerializer):
 class DemandSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
     created_date = serializers.ReadOnlyField()
-    #positions = serializers.PrimaryKeyRelatedField(many=True,queryset=Position.objects.all())
-    positions = PositionSerializer(read_only=True,)
+    positions = PositionSerializer(read_only=True, many=True)
                                    #queryset=Position.objects.filter(demand=1))
 
     class Meta:
@@ -35,7 +34,7 @@ class DemandSerializer(serializers.ModelSerializer):
             'created_date',
             'description',
             'user',
-            'positions') #Как сделать, чтобы для каждой завки выводились ее позиции
+            'positions')
 
         # def create(self, validated_data):
         #     position_data = validated_data.pop('position')

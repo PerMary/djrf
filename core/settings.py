@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'material',
     'djoser',
     'rest_framework',
-    'rest_framework_swagger',
+    #'rest_framework_swagger',
     'drf_yasg',
     'mptt',
     #myapp
@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'drfbase',
+        'NAME': 'mydbdrf',
         'USER': 'mari',
         'PASSWORD': 'marina1996',
         'HOST': 'localhost',
@@ -135,22 +135,30 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
+
 }
 
+REST_FRAMEWORK = {
+    # Parser classes priority-wise for Swagger
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser',
+        'rest_framework.parsers.JSONParser',
+    ],
+}
 
 
 # Swagger settings
 
-#AUTH_USER_MODEL = 'users.Profile'
+AUTH_USER_MODEL = 'users.User'
 
-SWAGGER_SETTINGS = {
-    'SECURITY_DEFINITIONS': {
-        'api_key': {
-            'type': 'apiKey',
-            'in': 'header',
-            'name': 'Authorization'
-        }
-    },
-}
+# SWAGGER_SETTINGS = {
+#     'SECURITY_DEFINITIONS': {
+#         'api_key': {
+#             'type': 'apiKey',
+#             'in': 'header',
+#             'name': 'Authorization'
+#         }
+#     },
+# }

@@ -1,6 +1,9 @@
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+
+User=get_user_model()
 
 
 
@@ -17,7 +20,7 @@ class Demand(models.Model):
         help_text='Закупка оборудования для проекта "Источник И1"',
     )
     user = models.ForeignKey(
-        'auth.User',
+        'users.User',
         related_name='demands',
         on_delete=models.CASCADE
     )
@@ -43,6 +46,7 @@ class Position(models.Model):
         Demand,
         on_delete=models.CASCADE,
         verbose_name='Номер заявки: ',
+        related_name='positions',
     )
     name_product = models.CharField(
         max_length=50,
@@ -66,3 +70,6 @@ class Position(models.Model):
 
     def __str__(self):
         return "Позиция " + str(self.id) + ", " + self.name_product
+
+    class Meta:
+        ordering = ['id']

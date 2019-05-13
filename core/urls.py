@@ -17,11 +17,12 @@ from django.urls import path, re_path
 from django.contrib import admin
 from rest_framework.routers import DefaultRouter
 from demands.views import DemandViewSet, PositionViewSet
-from users.views import UserViewSet, ProfileViewSet
+from users.views import UserViewSet
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from django.conf.urls import include
+from rest_framework_swagger.views import get_swagger_view
 
 schema_view = get_schema_view(
    # TODO: write something reasonable below
@@ -31,18 +32,18 @@ schema_view = get_schema_view(
       default_version='v0',
       description="Test description",
       terms_of_service="https://www.google.com/policies/terms/",
-      #contact=openapi.Contact(email="contact@snippets.local"),
+      contact=openapi.Contact(email="contact@snippets.local"),
       license=openapi.License(name="BSD License"),
    ),
    public=True,
-   permission_classes=(permissions.AllowAny,),
+   #permission_classes=(permissions.AllowAny,),
 )
 
 router = DefaultRouter()
 router.register(r'demands', DemandViewSet)
 router.register(r'users', UserViewSet)
 router.register(r'positions', PositionViewSet)
-router.register(r'profiles', ProfileViewSet)
+#router.register(r'profiles', ProfileViewSet)
 
 urlpatterns = [
     re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
@@ -52,7 +53,9 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('auth', include('djoser.urls')),
     path('auth', include('djoser.urls.authtoken')),
-    #path('api/', include(router.urls)),
+    path('api/', include(router.urls)),
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
 ]
+
+
