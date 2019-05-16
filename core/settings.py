@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'material',
     'djoser',
     'rest_framework',
-    #'rest_framework_swagger',
+    'rest_framework_swagger',
     'drf_yasg',
     'mptt',
     #myapp
@@ -87,7 +87,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'mydbdrf',
-        'USER': 'mari',
+        'USER': 'marina',
         'PASSWORD': 'marina1996',
         'HOST': 'localhost',
         'PORT': '',

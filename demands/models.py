@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 #from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
+from django.core import validators
 
 User=get_user_model()
 
@@ -66,6 +67,7 @@ class Position(models.Model):
         verbose_name='Цена за 1 шт:',
         default=0,
         help_text='0',
+        validators=[validators.MinValueValidator(0)],
     )
 
     def __str__(self):
