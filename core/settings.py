@@ -39,9 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #install app
     'material',
-    'djoser',
+    'corsheaders',
     'rest_framework',
-    'rest_framework_swagger',
+    'rest_framework.authtoken',
+    'djoser',
+    #'rest_framework_swagger',
     'drf_yasg',
     'mptt',
     #myapp
@@ -57,6 +59,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -87,7 +91,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'mydbdrf',
-        'USER': 'marina',
+        'USER': 'mari',
         'PASSWORD': 'marina1996',
         'HOST': 'localhost',
         'PORT': '',
@@ -141,11 +145,14 @@ REST_FRAMEWORK = {
 
 REST_FRAMEWORK = {
     # Parser classes priority-wise for Swagger
-    'DEFAULT_PARSER_CLASSES': [
-        'rest_framework.parsers.FormParser',
-        'rest_framework.parsers.MultiPartParser',
-        'rest_framework.parsers.JSONParser',
-    ],
+    # 'DEFAULT_PARSER_CLASSES': [
+    #     'rest_framework.parsers.FormParser',
+    #     'rest_framework.parsers.MultiPartParser',
+    #     'rest_framework.parsers.JSONParser',
+    # ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
 }
 
 
@@ -162,3 +169,14 @@ AUTH_USER_MODEL = 'users.User'
 #         }
 #     },
 # }
+
+
+#чтобы подключиться к angular не работает
+CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ALLOW_CREDENTIALS = True
+# CORS_ORIGIN_WHITELIST = (
+#     'localhost:4200',
+# )
+# CORS_ORIGIN_REGEX_WHITELIST = (
+#     'localhost:4200',
+# )

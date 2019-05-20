@@ -22,9 +22,9 @@ class PositionSerializer(serializers.ModelSerializer):
 
 
 class DemandSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)
+    # user = UserSerializer(read_only=True)
     created_date = serializers.ReadOnlyField()
-    positions = PositionSerializer(read_only=True, many=True)
+    # positions = PositionSerializer(read_only=True, many=True)
                                    #queryset=Position.objects.filter(demand=1))
 
     class Meta:
@@ -33,8 +33,9 @@ class DemandSerializer(serializers.ModelSerializer):
             'id',
             'created_date',
             'description',
-            'user',
-            'positions')
+            # 'user',
+            # 'positions',
+        )
 
         # def create(self, validated_data):
         #     position_data = validated_data.pop('position')
