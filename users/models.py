@@ -2,35 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User, AbstractUser, UserManager
 from django.contrib.auth.hashers import make_password
 
-# class Profile(models.Model):
-# 	user = models.OneToOneField(
-# 		User,
-# 		on_delete=models.CASCADE,
-# 		verbose_name='Пользователь')
-#
-# 	lastname = models.CharField(
-# 		max_length=200,
-# 		verbose_name='Фамилия: ',
-# 		help_text='Иванов',
-# 	)
-# 	firstname = models.CharField(
-# 		max_length=150,
-# 		verbose_name='Имя: ',
-# 		help_text='Иван',
-#
-# 	)
-# 	middle_name = models.CharField(
-# 		max_length=200,
-# 		default='',
-# 		verbose_name='Отчество: ',
-# 	    help_text='Иванович',)
-#
-# 	class Meta:
-# 		ordering = ['id']
-
-
-
-#Как убрать профиль и вместо него использовать расширенный менеджер пользователя?
 
 class User(AbstractUser):
 	username = models.CharField(
@@ -64,6 +35,20 @@ class User(AbstractUser):
 
 	class Meta:
 		ordering = ['id']
+
+
+	def full_name(self):
+		if self.middle_name:
+			return self.last_name + ' ' + self.first_name + ' ' + self.middle_name
+		else:
+			return self.first_name + '' + self.last_name
+
+
+	def short_name(self):
+		if self.middle_name:
+			return self.first_name[0] + '.' + self.middle_name[0] + '.' + ' ' + self.last_name
+		else:
+			return self.first_name[0] + '.' + ' ' + self.last_name
     #
 	# def set_password(self, raw_password):
 	# 	self.password = make_password(raw_password)

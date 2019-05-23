@@ -39,11 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #install app
     'material',
-    'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
-    #'rest_framework_swagger',
+    'corsheaders',
     'drf_yasg',
     'mptt',
     #myapp
@@ -54,13 +53,12 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -91,7 +89,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'mydbdrf',
-        'USER': 'mari',
+        'USER': 'marina',
         'PASSWORD': 'marina1996',
         'HOST': 'localhost',
         'PORT': '',
@@ -144,21 +142,20 @@ REST_FRAMEWORK = {
 }
 
 REST_FRAMEWORK = {
-    # Parser classes priority-wise for Swagger
-    # 'DEFAULT_PARSER_CLASSES': [
-    #     'rest_framework.parsers.FormParser',
-    #     'rest_framework.parsers.MultiPartParser',
-    #     'rest_framework.parsers.JSONParser',
-    # ],
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
-    ),
+    # 'DEFAULT_AUTHENTICATION_CLASSES': (
+    #     'rest_framework.authentication.TokenAuthentication',
+    # ),
 }
 
 
-# Swagger settings
 
 AUTH_USER_MODEL = 'users.User'
+
+#чтобы подключиться к angular не работает
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+# Swagger settings
 
 # SWAGGER_SETTINGS = {
 #     'SECURITY_DEFINITIONS': {
@@ -169,14 +166,3 @@ AUTH_USER_MODEL = 'users.User'
 #         }
 #     },
 # }
-
-
-#чтобы подключиться к angular не работает
-CORS_ORIGIN_ALLOW_ALL = True
-# CORS_ALLOW_CREDENTIALS = True
-# CORS_ORIGIN_WHITELIST = (
-#     'localhost:4200',
-# )
-# CORS_ORIGIN_REGEX_WHITELIST = (
-#     'localhost:4200',
-# )

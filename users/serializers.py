@@ -4,20 +4,9 @@ from rest_framework import serializers
 from demands.models import Demand
 from django.contrib.auth import get_user_model
 #from demands.serializers import DemandSerializer #Поооооочееееемуууууу не могу импортировать
-#
-# class ProfileSerializer(serializers.ModelSerializer):
-#     # #user = serializers.PrimaryKeyRelatedField(read_only=True,
-#     #                                           source='users',
-#     #
-#     # user = serializers.PrimaryKeyRelatedField(
-#     #                                           queryset=User.objects.all())
-#
-#
-#     class Meta:
-#         model = Profile
-#         fields = (
-#             'middle_name',
-#         )
+
+
+
 
 User=get_user_model()
 
@@ -36,6 +25,8 @@ class UserSerializer(serializers.ModelSerializer):
             'first_name',
             'last_name',
             'middle_name',
+            'full_name',
+            'short_name',
             #'demands', #вывод заявок которые пользовтель создал
         )
 
@@ -43,8 +34,7 @@ class UserSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(**validated_data)
         return user
 
-    #Как сделать обновление пароля, чтобы он не был открытым
-    #Создать функцию update?
+    #Как сделать обновление пароля, чтобы он не был хэшем если его не изменять / Djoser
     def update(self, instance, validated_data):
         print(validated_data)
         instance.username=validated_data.get('username', instance.username)

@@ -3,6 +3,7 @@ from django.utils import timezone
 #from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from django.core import validators
+from django.db.models import Sum
 
 User=get_user_model()
 
@@ -32,11 +33,27 @@ class Demand(models.Model):
         return self.description
 
 
-    # def save(self, *args, **kwargs):
-    #     super(Demand,self).save( *args, **kwargs)
-
     class Meta:
-        ordering = ['-created_date']
+        ordering = ['id']
+
+    # Подсчет количества позиций
+    def position_count(self):
+        return Position.objects.filter(demand=self.id).count()
+
+    # Подсчет количесвтва товаров
+    def product_count(self):
+        prod_count = Position.objects.filter(demand=self.id).aggregate(Sum("quantity"))['quantity__sum']
+        if prod_count == None:
+            prod_count=0
+        return prod_count
+
+    # Подчет общей стоимости всех позиций в зявке
+    def price_all(self):
+        price_all=0
+        positions = Position.objects.filter(demand=self.id)
+        for position in positions:
+            price_all += position.quantity * position.price_one
+        return price_all
 
 
 # Позиции
@@ -75,3 +92,7 @@ class Position(models.Model):
 
     class Meta:
         ordering = ['id']
+
+    # Подсчет общей стоимости позиции
+    def full_price_position(self):
+        return (self.quantity * self.price_one)

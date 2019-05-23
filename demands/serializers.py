@@ -10,6 +10,7 @@ class PositionSerializer(serializers.ModelSerializer):
     demand = serializers.PrimaryKeyRelatedField(write_only=False,
                                                queryset=Demand.objects.all())
 
+
     class Meta:
         model = Position
         fields = (
@@ -18,13 +19,15 @@ class PositionSerializer(serializers.ModelSerializer):
             'name_product',
             'art_product',
             'quantity',
-            'price_one',)
+            'price_one',
+            'full_price_position', )
 
 
 class DemandSerializer(serializers.ModelSerializer):
-    # user = UserSerializer(read_only=True)
+    user = UserSerializer(read_only=True)
+    # short_name= UserSerializer(read_only=True)
     created_date = serializers.ReadOnlyField()
-    # positions = PositionSerializer(read_only=True, many=True)
+    positions = PositionSerializer(read_only=True, many=True)
                                    #queryset=Position.objects.filter(demand=1))
 
     class Meta:
@@ -33,8 +36,12 @@ class DemandSerializer(serializers.ModelSerializer):
             'id',
             'created_date',
             'description',
-            # 'user',
-            # 'positions',
+            # 'short_name',
+            'user',
+            'positions',
+            'position_count',
+            'product_count',
+            'price_all'
         )
 
         # def create(self, validated_data):

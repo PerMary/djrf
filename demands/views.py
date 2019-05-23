@@ -11,6 +11,7 @@ from rest_framework import renderers
 from django.utils import timezone
 from rest_framework import viewsets
 from rest_framework.decorators import action
+from django.shortcuts import get_object_or_404
 
 
 
@@ -18,7 +19,7 @@ from rest_framework.decorators import action
 class DemandViewSet(viewsets.ModelViewSet):
     queryset = Demand.objects.all()
     serializer_class = DemandSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    # permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     #                       IsOwnerOrReadOnly,)
 
     # @action(
@@ -37,9 +38,12 @@ class DemandViewSet(viewsets.ModelViewSet):
 
 
 class PositionViewSet(viewsets.ModelViewSet):
+    # position =Position.objects.all()
+    # demands = get_object_or_404(Demand, id=demand)
     queryset = Position.objects.all()
     serializer_class =  PositionSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    # filter_fields = ('demand')
+    # permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     #                       IsOwnerOrReadOnly,)
 
 
