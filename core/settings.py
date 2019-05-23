@@ -89,7 +89,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'mydbdrf',
-        'USER': 'marina',
+        'USER': 'mari',
         'PASSWORD': 'marina1996',
         'HOST': 'localhost',
         'PORT': '',
@@ -136,16 +136,17 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-REST_FRAMEWORK = {
-    'PAGE_SIZE': 10
+# REST_FRAMEWORK = {
+#     'PAGE_SIZE': 10
+#
+# }
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
 }
 
-REST_FRAMEWORK = {
-    # 'DEFAULT_AUTHENTICATION_CLASSES': (
-    #     'rest_framework.authentication.TokenAuthentication',
-    # ),
-}
 
 
 
@@ -154,6 +155,7 @@ AUTH_USER_MODEL = 'users.User'
 #чтобы подключиться к angular не работает
 
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_HEADERS=['autorization', 'content-type']
 
 # Swagger settings
 
