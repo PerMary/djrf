@@ -89,7 +89,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'mydbdrf',
-        'USER': 'marina',
+        'USER': 'mari',
         'PASSWORD': 'marina1996',
         'HOST': 'localhost',
         'PORT': '',
@@ -145,6 +145,9 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
     ),
+    # 'DEFAULT_PERMISSION_CLASSES': (
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ),
 }
 
 
@@ -155,16 +158,23 @@ AUTH_USER_MODEL = 'users.User'
 #чтобы подключиться к angular не работает
 
 CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_HEADERS=['autorization', 'content-type']
+CORS_ALLOW_HEADERS=['authorization', 'content-type']
 
 # Swagger settings
 
-# SWAGGER_SETTINGS = {
-#     'SECURITY_DEFINITIONS': {
-#         'api_key': {
-#             'type': 'apiKey',
-#             'in': 'header',
-#             'name': 'Authorization'
-#         }
-#     },
-# }
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'api_key': {
+            'type': 'apiKey',
+            'in': 'header',
+            'name': 'Authorization'
+        }
+    },
+}
+
+#Djoser settings
+DJOSER ={
+    'SERIALIZERS': {
+        'user': 'users.serializers.UserSerializer',
+    }
+}

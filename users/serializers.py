@@ -16,7 +16,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        ref_name = 'custom_user'
+        # ref_name = 'custom_user'
         fields = (
             'id',
             'username',

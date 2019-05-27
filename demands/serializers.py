@@ -44,6 +44,8 @@ class DemandSerializer(serializers.ModelSerializer):
             'price_all'
         )
 
+        # Сделать еще один сериалайзер with positions
+
         # def create(self, validated_data):
         #     position_data = validated_data.pop('position')
         #     #demand = Demand.objects.create_demand(**validated_data)

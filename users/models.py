@@ -24,6 +24,7 @@ class User(AbstractUser):
 		max_length=255,
 		blank=True,
 	)
+    # Убрать(есть в стандортной модели, переписывать незачем)
 
 	middle_name = models.CharField(
 		verbose_name='отчество',
