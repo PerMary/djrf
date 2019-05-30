@@ -40,10 +40,10 @@ schema_view = get_schema_view(
 )
 
 router = DefaultRouter()
-router.register(r'demands', DemandViewSet)
-router.register(r'users', UserViewSet)
-router.register(r'positions', PositionViewSet)
-# router.register(r'demidpos', DemandIDPosViewSet)-бред
+router.register(r'demands', DemandViewSet, 'demands')
+router.register(r'users', UserViewSet, 'users')
+router.register(r'positions', PositionViewSet, 'positions')
+# router.register(r'withpos', DemandIDPosViewSet, 'withpos')
 
 urlpatterns = [
     re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
