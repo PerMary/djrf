@@ -43,7 +43,7 @@ router = DefaultRouter()
 router.register(r'demands', DemandViewSet)
 router.register(r'users', UserViewSet)
 router.register(r'positions', PositionViewSet)
-#router.register(r'profiles', ProfileViewSet)
+# router.register(r'demidpos', DemandIDPosViewSet)-бред
 
 urlpatterns = [
     re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),

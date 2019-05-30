@@ -42,9 +42,17 @@ class PositionViewSet(viewsets.ModelViewSet):
     # demands = get_object_or_404(Demand, id=demand)
     queryset = Position.objects.all()
     serializer_class =  PositionSerializer
-    # filter_fields = ('demand')
+    filter_fields = ('demand',)
     # permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     #                       IsOwnerOrReadOnly,)
+
+# class DemandIDPosViewSet(viewsets.ModelViewSet):
+#     queryset = Demand.objects.all()
+#     serializer_class = DemandIDPosSerializer
+#
+#     def perform_create(self, serializer):
+#         serializer.save(user=self.request.user,
+#                         created_date=timezone.now())
 
 
 

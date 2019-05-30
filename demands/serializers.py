@@ -25,10 +25,13 @@ class PositionSerializer(serializers.ModelSerializer):
 
 class DemandSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
-    # short_name= UserSerializer(read_only=True)
     created_date = serializers.ReadOnlyField()
-    positions = PositionSerializer(read_only=True, many=True)
-                                   #queryset=Position.objects.filter(demand=1))
+    positions = PositionSerializer(read_only=True,
+                                   many=True)
+    # positions_id = serializers.PrimaryKeyRelatedField(read_only=True,
+    #                                                   many=True,
+    #                                                   source='positions',
+    #                                                   queryset=Position.objects.all())
 
     class Meta:
         model = Demand
@@ -36,7 +39,6 @@ class DemandSerializer(serializers.ModelSerializer):
             'id',
             'created_date',
             'description',
-            # 'short_name',
             'user',
             'positions',
             'position_count',
@@ -44,23 +46,23 @@ class DemandSerializer(serializers.ModelSerializer):
             'price_all'
         )
 
-        # Сделать еще один сериалайзер with positions
-
-        # def create(self, validated_data):
-        #     position_data = validated_data.pop('position')
-        #     #demand = Demand.objects.create_demand(**validated_data)
-        #     demand =Demand.objects.create_demand(**validated_data)
-        #     Position.object.create(position=position, **position_data)
-        #     return demand
-
-
-# class UserSerializer(serializers.ModelSerializer):
-#     #demands = serializers.PrimaryKeyRelatedField(many=True, queryset=Demand.objects.all())
-#
+# class DemandIDPosSerializer(serializers.ModelSerializer):
+#     user = UserSerializer(read_only=True)
+#     created_date = serializers.ReadOnlyField()
+#     positions_id = serializers.PrimaryKeyRelatedField(read_only=True,
+#                                                       many=True,
+#                                                       source='positions',)
+#                                                       # queryset=Position.objects.all() )
 #
 #     class Meta:
-#         model = User
+#         model=Demand
 #         fields = (
 #             'id',
-#             'username',) #Если оставить demands и добавить его здесь, то будет видно какие заявки пользователь создал
-
+#             'created_date',
+#             'description',
+#             'user',
+#             'positions_id',
+#             'position_count',
+#             'product_count',
+#             'price_all'
+#         )
