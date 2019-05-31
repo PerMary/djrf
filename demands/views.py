@@ -20,6 +20,8 @@ from django.shortcuts import get_object_or_404
 class DemandViewSet(viewsets.ViewSet):
     # queryset = Demand.objects.all()
     # serializer_class = DemandSerializer
+
+
     def list(self, request, *args, **kwargs):
         queryset = Demand.objects.all()
         seriaizer = DemandSerializer(queryset, many=True)
@@ -30,6 +32,8 @@ class DemandViewSet(viewsets.ViewSet):
         demand = get_object_or_404(queryset, pk=pk)
         seriaizer = DemandPosSerializer(demand)
         return Response(seriaizer.data)
+    # эта штука в список выводит все заявки заявки без позиций, но если перейти к
+    # конкретной заявке /id то там будет описание заявки и плюс ее позиции
 
 
 
@@ -69,14 +73,6 @@ class PositionViewSet(viewsets.ModelViewSet):
 #                         created_date=timezone.now())
 
 
-
-# @api_view(['GET'])
-# def api_root(request, format=None):
-#     return Response({
-#         'users': reverse('user-list', request=request, format=format),
-#         'demands': reverse('demand-list', request=request, format=format)
-#     })
-#
 
                     
 
