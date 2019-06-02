@@ -1,5 +1,5 @@
 from .models import Demand, Position
-from demands.serializers import DemandSerializer, PositionSerializer, DemandPosSerializer
+from demands.serializers import DemandSerializer, PositionSerializer
 from rest_framework import generics
 #from django.contrib.auth.models import User
 from rest_framework import permissions
@@ -17,22 +17,22 @@ from django.shortcuts import get_object_or_404
 
 
 
-class DemandViewSet(viewsets.ViewSet):
-    # queryset = Demand.objects.all()
-    # serializer_class = DemandSerializer
+class DemandViewSet(viewsets.ModelViewSet):
+    queryset = Demand.objects.all()
+    serializer_class = DemandSerializer
 
 
-    def list(self, request, *args, **kwargs):
-        queryset = Demand.objects.all()
-        seriaizer = DemandSerializer(queryset, many=True)
-        return Response (seriaizer.data)
-
-    def retrieve(self, request, pk=None):
-        queryset = Demand.objects.all()
-        demand = get_object_or_404(queryset, pk=pk)
-        seriaizer = DemandPosSerializer(demand)
-        return Response(seriaizer.data)
-    # эта штука в список выводит все заявки заявки без позиций, но если перейти к
+    # def list(self, request, *args, **kwargs):
+    #     queryset = Demand.objects.all()
+    #     seriaizer = DemandSerializer(queryset, many=True)
+    #     return Response (seriaizer.data)
+    #
+    # def retrieve(self, request, pk=None):
+    #     queryset = Demand.objects.all()
+    #     demand = get_object_or_404(queryset, pk=pk)
+    #     seriaizer = DemandPosSerializer(demand)
+    #     return Response(seriaizer.data)
+    # # эта штука в список выводит все заявки заявки без позиций, но если перейти к
     # конкретной заявке /id то там будет описание заявки и плюс ее позиции
 
 

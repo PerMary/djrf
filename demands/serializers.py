@@ -46,25 +46,25 @@ class DemandSerializer(serializers.ModelSerializer):
             'price_all'
         )
 
-class DemandPosSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)
-    created_date = serializers.ReadOnlyField()
-    positions = PositionSerializer(read_only=True,
-                                   many=True)
+# class DemandPosSerializer(serializers.ModelSerializer):
+#     user = UserSerializer(read_only=True)
+#     created_date = serializers.ReadOnlyField()
+#     positions = PositionSerializer(read_only=True,
+#                                    many=True)
     # positions_id = serializers.PrimaryKeyRelatedField(read_only=True,
     #                                                   many=True,
     #                                                   source='positions',)
-                                                      # queryset=Position.objects.all() )
-
-    class Meta:
-        model=Demand
-        fields = (
-            'id',
-            'created_date',
-            'description',
-            'user',
-            'positions',
-            'position_count',
-            'product_count',
-            'price_all'
-        )
+    #                                                   # queryset=Position.objects.all() )
+    #
+    # class Meta:
+    #     model=Demand
+    #     fields = (
+    #         'id',
+    #         'created_date',
+    #         'description',
+    #         'user',
+    #         'positions',
+    #         'position_count',
+    #         'product_count',
+    #         'price_all'
+    #     )
