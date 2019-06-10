@@ -1,0 +1,41 @@
+{% block content %}
+<div>
+  <p class="title_info_demand" align="center"><b>Информация о завке: №{{ demand.id}} </b></p>
+  <div class="info_demand">
+  <p><b><i>Дата создания: </i></b>  {{ demand.created_date|date:"d.MM.y"}}</p>
+  <p><b><i>Номер заявки: </i></b> {{ demand.id}} </p>
+  <p><b><i>Описание: </i></b> {{ demand.description}} </p>
+  <p><b><i>Количество позиций: </i></b> {{ demand.position_count}} </p>
+  <p><b><i>Количество товаров: </i></b> {{ demand.product_count}} </p>
+  <p><b><i>Общая стоимость(руб): </i></b> {{ demand.price_all}} </p>
+  </div>
+  <div align="center">
+    <div class="table_style">
+      <table width="1000" border="1pxx">
+        <thead>
+        <tr>
+          <th>Наименование:</th>
+          <th>Артикул:</th>
+          <th>Количество:</th>
+          <th>Цена шт(руб):</th>
+          <th>Общая ст-ть(руб):</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ position.name_product }} </td>
+            <td>{{ position.art_product }}</td>
+            <td>{{ position.quantity }}</td>
+            <td>{{ position.price_one }}</td>
+            <td>{{ position.price_all }}</td>
+        </tbody>
+      </table>
+    </div>
+  </div>
+{#  <div>#}
+{#    <h3 align="center">#}
+{#      Для данной заявки еще не создано ни одной позиции#}
+{#    </h3>#}
+{#  </div>#}
+</div>
+{% endblock %}
