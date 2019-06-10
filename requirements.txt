@@ -1,9 +1,8 @@
-Django==2.1.7
+django==2.1.7
 
 django-material==1.5.0
-
+django-filter==2.0.0
 django-rest-swagger==2.2.0
-
 djangorestframework==3.9.2
 
 drf-yasg==1.14.0
@@ -12,3 +11,7 @@ psycopg2==2.7.7
 reportlab==3.5.13
 
 django-mptt==0.10.0
+
+djoser==1.7.0
+
+weasyprint==47

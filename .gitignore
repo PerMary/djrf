@@ -11,6 +11,7 @@ core/settings.py
 # VENV
 myenv/
 myvenv/
+venv/
 
 .idea/
 

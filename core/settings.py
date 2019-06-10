@@ -39,13 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #install app
     'django_filters',
-    'material',
+    # 'material',
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
     'corsheaders',
     'drf_yasg',
-    'mptt',
+    # 'mptt',
     #myapp
     'demands',
     'users',
@@ -91,7 +91,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'mydbdrf',
-        'USER': 'marina',
+        'USER': 'mari',
         'PASSWORD': 'marina1996',
         'HOST': 'localhost',
         'PORT': '',
