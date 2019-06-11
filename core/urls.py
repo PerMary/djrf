@@ -18,6 +18,7 @@ from django.contrib import admin
 from rest_framework.routers import DefaultRouter
 from demands.views import DemandViewSet, PositionViewSet
 from users.views import UserViewSet
+from documents.views import DocumentViewSet
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -43,6 +44,7 @@ router = DefaultRouter()
 router.register(r'demands', DemandViewSet, 'demands')
 router.register(r'users', UserViewSet, 'users')
 router.register(r'positions', PositionViewSet, 'positions')
+router.register(r'documents', DocumentViewSet, 'documents' )
 # router.register(r'withpos', DemandIDPosViewSet, 'withpos')
 
 urlpatterns = [

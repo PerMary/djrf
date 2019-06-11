@@ -27,3 +27,10 @@ class Document (models.Model):
         max_length=250,
         verbose_name='Ссылка документа'
     )
+
+
+    def __str__ (self):
+        return "PDF документ к заявке №" + str(self.demand.id)
+
+    class Meta:
+        ordering = ['-date_create']

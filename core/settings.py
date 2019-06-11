@@ -91,7 +91,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'mydbdrf',
-        'USER': 'mari',
+        'USER': 'marina',
         'PASSWORD': 'marina1996',
         'HOST': 'localhost',
         'PORT': '',
@@ -184,7 +184,11 @@ DJOSER ={
     }
 }
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-BASE_URL = '127.0.0.1'
+BASE_URL = '127.0.0.:8000'
+
+FILE_DIR = os.path.join(BASE_DIR, 'files')
+
+MEDIA_URL = '/files/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'files')
