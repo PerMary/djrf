@@ -1,3 +1,4 @@
+{% extends 'documents/PDF_base.html' %}
 {% block content %}
 <div>
   <p class="title_info_demand" align="center"><b>Информация о завке: №{{ demand.id}} </b></p>
@@ -10,6 +11,7 @@
   <p><b><i>Общая стоимость(руб): </i></b> {{ demand.price_all}} </p>
   </div>
   <div align="center">
+    {% if positions|length > 0 %}
     <div class="table_style">
       <table width="1000" border="1pxx">
         <thead>
@@ -22,20 +24,20 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
+          {% for position in positions %}
+          <tr>
             <td>{{ position.name_product }} </td>
             <td>{{ position.art_product }}</td>
             <td>{{ position.quantity }}</td>
             <td>{{ position.price_one }}</td>
             <td>{{ position.price_all }}</td>
+          </tr>
+          {% endfor %}  
         </tbody>
       </table>
     </div>
+    {% else %}
+      <p class="delete_text" align="center">Нет созданных позиций для данной заявки</p>
+    {% endif }
   </div>
-{#  <div>#}
-{#    <h3 align="center">#}
-{#      Для данной заявки еще не создано ни одной позиции#}
-{#    </h3>#}
-{#  </div>#}
-</div>
 {% endblock %}

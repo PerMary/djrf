@@ -1,11 +1,13 @@
 from documents.serializers import DocumentSerializer
+from weasyprint import HTML
 from rest_framework import viewsets
 from .models import Document
 from django.utils import timezone
-from django.conf import settings
-import os
 from django.template.loader import render_to_string
-from uuid import uuid4
+from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
+from demands.models import Demand,Position
+import tempfile
 
 class DocumentViewSet(viewsets.ModelViewSet):
     queryset = Document.objects.all()
@@ -15,26 +17,28 @@ class DocumentViewSet(viewsets.ModelViewSet):
         serializer.save(date_create=timezone.now(),
                         user_create=self.request.user,)
 
+    def pdf_generate(request, id_demand):
 
-def generate_PDF(document, user, template, template_data):
+        demand = get_object_or_404(Demand, id=id_demand)
+        positinons = Position.objects.filter(demand=id_demand)
+        user = request.user
 
-    html_string = render_to_string(template, template_data)
-    html = HTML(string=html_string, base_url=settings.BASE_URL)
+        html_string = render_to_string('documents/PDF_for_demand.html',
+                                       {'demand':demand,
+                                        'positions': positinons})
+        html = HTML(string=html_string)
+        result = html.write_pdf
 
-    css_dir = os.path.join(settings.BASE_DIR, 'static', 'css')
+        response = HttpResponse(content_type='application/pdf;')
+        response['Content-Disposition'] = 'inline; filename=demand.pdf'
+        response['Content-Transfer-Encoding'] = 'binary'
+        with tempfile.NamedTemporaryFile(delete=True) as output:
+            output.write(result)
+            output.flush()
+            output = open(output.name, 'r')
+            response.write(output.read())
 
-    filename = u'{}.pdf'.format(uuid4())
-    path = os.path.join(settings.FILE_DIR, filename)
-    f = open(path, "w+b")
 
-    html.write_pdf(f)
+        return response
 
-    f.close()
 
-    doc_file = Document(
-        user = user
-    )
-    doc_file.doc_file.name = filename
-    doc_file.save()
-
-    return document

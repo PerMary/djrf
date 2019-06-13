@@ -23,7 +23,6 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from django.conf.urls import include
-from rest_framework_swagger.views import get_swagger_view
 
 schema_view = get_schema_view(
    # TODO: write something reasonable below
@@ -45,6 +44,7 @@ router.register(r'demands', DemandViewSet, 'demands')
 router.register(r'users', UserViewSet, 'users')
 router.register(r'positions', PositionViewSet, 'positions')
 router.register(r'documents', DocumentViewSet, 'documents' )
+# router.register(r'generate', GenerateDocViewSet , 'generate_pdf')
 # router.register(r'withpos', DemandIDPosViewSet, 'withpos')
 
 urlpatterns = [
