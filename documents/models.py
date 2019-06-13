@@ -3,6 +3,10 @@ from django.utils import timezone
 from django.conf import settings
 from users.models import User
 from demands.models import Demand
+from django.contrib.auth import get_user_model
+
+User=get_user_model()
+
 
 class Document (models.Model):
     date_create = models.DateTimeField(
@@ -10,7 +14,7 @@ class Document (models.Model):
         verbose_name='Дата создания',
     )
     user_create = models.ForeignKey(
-        User,
+        'users.User',
         on_delete=models.CASCADE,
         verbose_name='Пользователь'
     )

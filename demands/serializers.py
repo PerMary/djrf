@@ -38,6 +38,7 @@ class DemandSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'created_date',
+            # 'changed',
             'description',
             'user',
             # 'positions',

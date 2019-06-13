@@ -30,7 +30,7 @@
             <td>{{ position.art_product }}</td>
             <td>{{ position.quantity }}</td>
             <td>{{ position.price_one }}</td>
-            <td>{{ position.price_all }}</td>
+            <td>{{ position.full_price_position }}</td>
           </tr>
           {% endfor %}  
         </tbody>
@@ -38,7 +38,6 @@
     </div>
     {% else %}
       <p class="delete_text" align="center">Нет созданных позиций для данной заявки</p>
-    {% endif }
+    {% endif %}
   </div>
-    <div>{{ demand.user }}</div>
 {% endblock %}

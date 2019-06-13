@@ -16,4 +16,4 @@ venv/
 .idea/
 
 # Media files
-media/*
+files/*

@@ -1,18 +1,17 @@
 from .models import Demand, Position
 from demands.serializers import DemandSerializer, PositionSerializer
-from rest_framework import generics
-#from django.contrib.auth.models import User
-from rest_framework import permissions
-from demands.permissions import IsOwnerOrReadOnly
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from rest_framework.reverse import reverse
-from rest_framework import renderers
+from django.conf import settings
 from django.utils import timezone
 from rest_framework import viewsets
 from rest_framework.decorators import action
-from django.shortcuts import get_object_or_404
+from rest_framework.response import Response
+from weasyprint import HTML, CSS
+import datetime
+from django.template.loader import render_to_string
+from documents.models import Document
+from django.contrib.auth import get_user_model
 
+User=get_user_model()
 
 
 
@@ -52,6 +51,27 @@ class DemandViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user,
                         created_date=timezone.now())
+
+    @action(detail=True)
+    def PDF(self,request, *args, **kwargs):
+        demand = self.get_object()
+        positions = Position.objects.filter(demand=demand)
+        today_date = datetime.datetime.today()
+        template_string = render_to_string('documents/PDF_for_demand.html', {'demand': demand,
+                                                                             'positions': positions})
+        html = HTML(string=template_string)
+        file_name = 'Demand_' + str(demand.id) + '_' + str(today_date.strftime('%Y-%m-%d_%H.%M.%S')) + '_detail' + '.pdf'
+        path_name = settings.MEDIA_ROOT + '/' + file_name
+        html.write_pdf(path_name)
+        url_name = settings.MEDIA_URL + file_name
+        # Document.objects.create(date_create=today_date,
+        #                         user_create= self.request.user,
+        #                         demand = demand,
+        #                         name_doc= file_name,
+        #                         url = url_name,
+        #                         )
+        return Response(url_name)
+
 
 
 

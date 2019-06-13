@@ -26,7 +26,9 @@ class Demand(models.Model):
         related_name='demands',
         on_delete=models.CASCADE
     )
-    highlighted = models.TextField()
+    changed = models.BooleanField(
+        default=False,
+    )
 
 
     def __str__(self):
@@ -87,12 +89,13 @@ class Position(models.Model):
         validators=[validators.MinValueValidator(0)],
     )
 
+    # Подсчет общей стоимости позиции
+    def full_price_position(self):
+        return (self.quantity * self.price_one)
+
     def __str__(self):
         return "Позиция " + str(self.id) + ", " + self.name_product
 
     class Meta:
         ordering = ['id']
 
-    # Подсчет общей стоимости позиции
-    def full_price_position(self):
-        return (self.quantity * self.price_one)
