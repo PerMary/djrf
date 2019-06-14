@@ -12,18 +12,21 @@
                 margin-right: 1cm;
                 margin-left: 3cm;
 
-                {#@bottom-center {#}
-                {#    content: 'Документ сформирован автоматически в системе "ТИГР"';#}
-                {#}#}
+            }
+
+            table.table-dem tr td {
+                text-align: center !important;
+            }
+
+            table.table-dem tr th {
+                text-align: center !important;
             }
         </style>
     {% endblock %}
 </head>
 <body>
   {% block content %}
-      <div class="container">
-          Some content here
-      </div>
+
   {% endblock %}
 </body>
 </html>

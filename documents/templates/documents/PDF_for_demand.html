@@ -3,7 +3,7 @@
 <div>
   <p class="title_info_demand" align="center"><b>Информация о завке: №{{ demand.id}} </b></p>
   <div class="info_demand">
-  <p><b><i>Дата создания: </i></b>  {{ demand.created_date|date:"d.MM.y"}}</p>
+  <p><b><i>Дата создания: </i></b>  {{ demand.created_date|date:'d E Y'}}</p>
   <p><b><i>Номер заявки: </i></b> {{ demand.id}} </p>
   <p><b><i>Описание: </i></b> {{ demand.description}} </p>
   <p><b><i>Количество позиций: </i></b> {{ demand.position_count}} </p>
@@ -35,10 +35,11 @@
           {% endfor %}  
         </tbody>
       </table>
+    sdfsgsdtgsdfgsfdg
     </div>
     {% else %}
       <p class="delete_text" align="center">Нет созданных позиций для данной заявки</p>
     {% endif }
   </div>
-    <div>{{ demand.user }}</div>
+    <div>{{ today_date|date:"d.MM.y" }}</div>
 {% endblock %}
