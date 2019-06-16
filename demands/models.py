@@ -4,8 +4,10 @@ from django.utils import timezone
 from django.contrib.auth import get_user_model
 from django.core import validators
 from django.db.models import Sum
+from django.db.models.signals import post_save, pre_save, pre_delete
+from django.dispatch import receiver
 
-User=get_user_model()
+User = get_user_model()
 
 
 
@@ -57,6 +59,16 @@ class Demand(models.Model):
             price_all += position.quantity * position.price_one
         return price_all
 
+    # @classmethod
+    # def post_save(cls, sender, created, instance, *args, **kwargs):
+    #
+    #     Demand.changed =
+
+
+# post_save.connect(Demand.post_save, sender=Demand)
+# @receiver(pre_save, sender=Demand)
+# def set_changed(sender, instance, **kwargs):
+#     instance.changed = True
 
 # Позиции
 class Position(models.Model):
@@ -98,4 +110,16 @@ class Position(models.Model):
 
     class Meta:
         ordering = ['id']
+
+
+@receiver(pre_save, sender=Position)
+def position_changed(sender, instance, **kwargs):
+    instance.demand.changed = True
+    instance.demand.save()
+
+
+@receiver(pre_delete, sender=Position)
+def position_deleted(sender, instance, **kwargs):
+    instance.demand.changed = True
+    instance.demand.save()
 

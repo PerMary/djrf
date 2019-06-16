@@ -53,23 +53,27 @@ class DemandViewSet(viewsets.ModelViewSet):
                         created_date=timezone.now())
 
     @action(detail=True)
-    def PDF(self,request, *args, **kwargs):
+    def PDF(self, request, *args, **kwargs):
         demand = self.get_object()
         positions = Position.objects.filter(demand=demand)
         today_date = datetime.datetime.today()
         template_string = render_to_string('documents/PDF_for_demand.html', {'demand': demand,
-                                                                             'positions': positions})
+                                                                             'positions': positions,
+                                                                             'today_date': today_date,
+                                                                             'user': request.user})
         html = HTML(string=template_string)
         file_name = 'Demand_' + str(demand.id) + '_' + str(today_date.strftime('%Y-%m-%d_%H.%M.%S')) + '_detail' + '.pdf'
         path_name = settings.MEDIA_ROOT + '/' + file_name
         html.write_pdf(path_name)
         url_name = settings.MEDIA_URL + file_name
-        # Document.objects.create(date_create=today_date,
-        #                         user_create= self.request.user,
-        #                         demand = demand,
-        #                         name_doc= file_name,
-        #                         url = url_name,
-        #                         )
+        Document.objects.create(date_create=today_date,
+                                user_create= request.user,
+                                demand = demand,
+                                name_doc= file_name,
+                                url = url_name,
+                                )
+        demand.changed = False
+        demand.save()
         return Response(url_name)
 
 
